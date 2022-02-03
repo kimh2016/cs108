@@ -1,0 +1,19 @@
+"""CS 108 Lab 3.1 
+
+Make prompt inputs for the first and last name and student ID.
+Then make User ID come out as all lower case of the first letter of
+the first name and first three letters of the last name and the first
+two numbers of the student ID.
+
+@author: Hansol Kim (hk94)
+@date: Spring, 2021
+"""
+
+# Put your solution code here, replacing this line.
+first_name = input('First name: ')
+first_name = first_name.lower()
+last_name = input('Last name: ')
+last_name = last_name.lower()
+student_number = input('Student ID: ')
+concatenated_string = first_name[0] + last_name + student_number[0:2]
+print('User ID:', concatenated_string )
