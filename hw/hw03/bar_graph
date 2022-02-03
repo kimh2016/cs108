@@ -1,0 +1,58 @@
+"""CS 108 Homework 3 
+
+Make a bar graph using loops. Program should be able to
+output as many as user inputs. The bars should be proportional
+to the size of the canvas. Rondom colors for bars are optional.
+
+@author: Hansol Kim (hk94)
+@date: Spring, 2021
+"""
+
+#First pull out guizero and import drawing.
+from guizero import App, Drawing 
+
+import random #import random for colors.
+
+app = App('Drawing Canvas')
+
+#Assign height and width of the canvas.
+
+height = 500
+width = 500
+drawing = Drawing(app, width = 500, height = 500)
+
+
+print('Please enter the data elements to graph.') #Make an instruction for the user. 
+
+#Using the while loop, make an input that can be stopped whenever
+#user press ENTER key.
+
+data = []
+while True:
+    the_input = input('data item (ENTER to quit): ')
+    if the_input == '' : break
+    data.append(float(the_input))
+
+# Before moving on to for loop, make variables for complex caculations 
+max_data = max(data) #This should be able to find the max number from the data.
+scale_factor = height / max_data # let the highest bar be the full height of the canvas.
+num_bars = len(data) 
+bar_width = width / num_bars # Width of the bar should fill in the width of the canvas.
+
+# Make a for loop statement so that each rectangle is calculated
+# by x1, y1, x2, and y2 coordinates using the variables above.
+# random colors should be inside the for loop so that random color
+# is filled in everytime a rectangle is created.
+
+for i in range(len(data)): 
+    scaled_height = data[i] * scale_factor
+    x = i * bar_width
+    y = height - scaled_height
+    x2 = x + bar_width
+    y2 = height
+    color = random.choice(['red', 'orange', 'yellow', 'green', 'blue', 'purple'])
+    drawing.rectangle(
+        x, y,
+        x2, y2, color
+        )
+
