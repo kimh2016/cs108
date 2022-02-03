@@ -1,0 +1,65 @@
+"""CS 108 Homework 5
+
+In this homework, upgrade the bar graph implementation
+that is built in a previous homework. Base this code 
+on the solution to the previous homework assignment.
+Write a module called bar_graph.py that implements a
+class named BarGraph.
+
+
+@author: Hansol Kim (hk94)
+@date: Spring, 2021
+"""
+
+import random #import random for random colors.
+
+class BarGraph:
+    
+    """
+    The new BarGraph class encapsulates the data and methods required for bar graph objects.
+    """    
+    
+    def __init__(self, data, color = 'random'):
+        
+        """
+        Include a constructor that receives a data list
+        and a color name, and stores them as instance variables
+        """
+        self.data = data
+        self.color = color
+        
+    def __str__(self): # Returns a string representing the graph's internal state.
+        return 'Bar Graph - ' + 'Color: ' + self.color + ' Data: ' + str(self.data)
+    
+    def draw (self, drawing, total_width, total_height):
+        
+        """
+        Receives GuiZero drawing canvas, the canvas width and height,
+        and draws the graph on that canvas
+        """
+        
+        max_data = max(self.data) 
+        scale_factor = total_height / max_data 
+        num_bars = len(self.data) 
+        bar_width = total_width / num_bars
+        for i in range(len(self.data)): 
+            scaled_height = self.data[i] * scale_factor
+            x = i * bar_width
+            y = total_height - scaled_height
+            x2 = x + bar_width
+            y2 = total_height
+            if self.color == 'random':
+                color = random.choice(['red', 'orange', 'yellow', 'green', 'blue', 'purple'])
+                drawing.rectangle(x, y,x2, y2, color)
+            else:
+                drawing.rectangle(x, y,x2, y2, self.color)
+                
+    def get_color(self): # Returns the specified graph color or, if the graph color is random, a random color. 
+        if self.color == 'random':
+            color = random.choice(['red', 'orange', 'yellow', 'green', 'blue', 'purple'])
+            return color
+        else:
+            return self.color
+            
+            
+        
